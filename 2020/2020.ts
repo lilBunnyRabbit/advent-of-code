@@ -5,11 +5,13 @@ import path from 'path';
 import { day_1 } from './day_1/day_1';
 import { day_2 } from './day_2/day_2';
 import { day_3 } from './day_3/day_3';
+import { day_4 } from './day_4/day_4';
 
 const days = [
     day_1,
     day_2,
-    day_3
+    day_3,
+    day_4
 ];
 
 export const year2020 = () => executeDays(0);
