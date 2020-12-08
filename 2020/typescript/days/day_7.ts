@@ -1,4 +1,4 @@
-import { executeParts, readFileByLine } from '../2020';
+import { executeParts, readFileByLine } from '../utils';
 
 export async function day_7() {
     const result: any = await solve();
@@ -12,7 +12,7 @@ export async function day_7() {
 async function solve(): Promise<any> {
     const SHINY_KEY = "shiny gold";
     const rules: {[key: string]: any} = {};
-    await readFileByLine(__dirname, (line: string) => {
+    await readFileByLine(7, (line: string) => {
         let [key, values]: any = line.replace(".", "").split(" bags contain ");
         const children: {[key: string]: number} = {};
         values.split(", ")

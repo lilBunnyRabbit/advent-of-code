@@ -1,4 +1,4 @@
-import { executeParts, readFileByLine } from '../2020';
+import { executeParts, readFileByLine } from '../utils';
 
 export async function day_2() {
     return executeParts(0, {}, [
@@ -9,7 +9,7 @@ export async function day_2() {
 
 async function part_1(): Promise<number> {
     let valid: number = 0;
-    await readFileByLine(__dirname, (line: string) => {
+    await readFileByLine(2, (line: string) => {
         const [data, password] = line.split(": ");
         const [minmax, character] = data.split(" ");
         const [min, max] = minmax.split("-");
@@ -24,7 +24,7 @@ async function part_1(): Promise<number> {
 
 async function part_2(): Promise<number> {
     let valid: number = 0;
-    await readFileByLine(__dirname, (line: string) => {
+    await readFileByLine(2, (line: string) => {
         const [data, password] = line.split(": ");
         const [minmax, character] = data.split(" ");
         const [min, max] = minmax.split("-");

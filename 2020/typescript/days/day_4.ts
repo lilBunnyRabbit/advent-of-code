@@ -1,4 +1,4 @@
-import { executeParts, readFileByLine } from '../2020';
+import { executeParts, readFileByLine } from '../utils';
 
 export async function day_4() {
     return executeParts(0, {}, [
@@ -41,7 +41,7 @@ async function checkPassports(ignoreValid: boolean) {
     let fields = createFields();
     let valid = 0;
 
-    await readFileByLine(__dirname, (line: string, row: number) => {
+    await readFileByLine(4, (line: string, row: number) => {
         if(line == "") return newPassport();
         line.split(" ").forEach((pair: string) => {
             const [key, value] = pair.split(":");

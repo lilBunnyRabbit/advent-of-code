@@ -1,8 +1,8 @@
-import { readFileByLine, executeParts } from '../2020';
+import { readFileByLine, executeParts } from '../utils';
 
 export async function day_1() {
     const input: number[] = [];
-    await readFileByLine(__dirname, (line: string) => input.push(Number.parseInt(line)));
+    await readFileByLine(1, (line: string) => input.push(Number.parseInt(line)));
 
     return executeParts(0, { input }, [
         part_1,

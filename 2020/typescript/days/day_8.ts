@@ -1,4 +1,4 @@
-import { executeParts, readFileByLine } from '../2020';
+import { executeParts, readFileByLine } from '../utils';
 
 export async function day_8() {
     const instructions = await getInstructions();
@@ -66,7 +66,7 @@ async function part_2({ instructions, index, accumulator, switched = false }: an
 async function getInstructions(): Promise<{ key: string, value: number, counter: number }[]> {
     const instructions: { key: string, value: number, counter: number }[] = [];
 
-    await readFileByLine(__dirname, (line: string) => {
+    await readFileByLine(8, (line: string) => {
         const [key, value] = line.split(" ");
         return instructions.push({
             key,

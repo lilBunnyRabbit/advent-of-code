@@ -1,4 +1,4 @@
-import { executeParts, readFileByLine } from '../2020';
+import { executeParts, readFileByLine } from '../utils';
 
 export async function day_6() {
     return executeParts(0, {}, [
@@ -11,7 +11,7 @@ async function part_1(): Promise<any> {
     let yes_counter = new Set();
     let total = 0;
 
-    await readFileByLine(__dirname, (line: string) => {
+    await readFileByLine(6, (line: string) => {
         if(line == "") {
             total += yes_counter.size;
             return yes_counter.clear();
@@ -26,7 +26,7 @@ async function part_2(): Promise<any> {
     let yes_counter: any = false;
     let total = 0;
 
-    await readFileByLine(__dirname, (line: string) => {
+    await readFileByLine(6, (line: string) => {
         if(line == "") {
             total += yes_counter.length || 0;
             return yes_counter = false;

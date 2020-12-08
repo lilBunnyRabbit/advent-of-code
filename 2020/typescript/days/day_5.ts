@@ -1,4 +1,4 @@
-import { executeParts, readFileByLine } from '../2020';
+import { executeParts, readFileByLine } from '../utils';
 
 export async function day_5() {
     const solution = await solve();
@@ -13,7 +13,7 @@ async function solve(): Promise<any> {
     let my_seat_id = -1;
     
     const seat_ids: any = [];
-    await readFileByLine(__dirname, (line: string) => {
+    await readFileByLine(5, (line: string) => {
         const row: {[key: string]: number} = { t: 127, b: 0 };
         const column: {[key: string]: number} = { t: 7, b: 0 };
         const calc = (top: boolean, data: any) => data[top ? "t" : "b"] = (top ? Math.floor : Math.ceil)((data.t - data.b) / 2) + data.b;
