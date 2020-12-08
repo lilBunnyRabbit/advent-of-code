@@ -9,6 +9,7 @@ import { day_4 } from './day_4/day_4';
 import { day_5 } from './day_5/day_5';
 import { day_6 } from './day_6/day_6';
 import { day_7 } from './day_7/day_7';
+import { day_8 } from './day_8/day_8';
 
 const days = [
     day_1,
@@ -17,7 +18,8 @@ const days = [
     day_4,
     day_5,
     day_6,
-    day_7
+    day_7,
+    day_8
 ];
 
 export const year2020 = () => executeDays(0);
