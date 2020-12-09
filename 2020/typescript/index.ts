@@ -8,6 +8,7 @@ import { day_5 } from './days/day_5';
 import { day_6 } from './days/day_6';
 import { day_7 } from './days/day_7';
 import { day_8 } from './days/day_8';
+import { day_9 } from './days/day_9';
 
 const days = [
     day_1,
@@ -17,8 +18,9 @@ const days = [
     day_5,
     day_6,
     day_7,
-    day_8
+    day_8,
+    day_9
 ];
 
-// executeDay(days, 0);
-executeDays(days);
+executeDay(days, 8);
+// executeDays(days);
