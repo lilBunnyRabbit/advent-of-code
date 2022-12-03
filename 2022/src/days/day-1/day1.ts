@@ -1,5 +1,5 @@
 import { sumArray } from "../../tools";
-import { Day, readInput, readInputByLine, readInputSplit } from "../../utils";
+import { Day, readInputSplit } from "../../utils";
 
 export const Day1: Day = {
   name: "Day 1",

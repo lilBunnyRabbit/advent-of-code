@@ -27,22 +27,21 @@ export const readInputByLine = async (dirname: string, callback: (line: string, 
   for await (const line of rl) await Promise.resolve(callback(line, index++));
 };
 
-export const printDay = (day: Day) => {
+export const printDay = async (day: Day) => {
   const { name, ...parts } = day;
 
-  const parsePartName = (part: string) => {
-    part = part.toString();
-    return part.charAt(0).toUpperCase() + part.slice(1).replace("_", " ");
+  const getPartResult = async (partName: string) => {
+    const result = await Promise.resolve((parts as any)[partName]());
+    partName = partName.toString();
+    return `- ${partName.charAt(0).toUpperCase() + partName.slice(1).replace("_", " ")}: ${result}`;
   };
 
-  const partsKeys: string[] = Object.keys(parts);
-  if (partsKeys.length === 0) return console.log(`${name}: No parts!`);
+  const keys: string[] = Object.keys(parts);
+  if (keys.length === 0) return console.log(`${name}: No parts!`);
 
-  console.log(
-    `${name}:\n` +
-      partsKeys
-        .sort((a, b) => a.localeCompare(b))
-        .map((partName) => `- ${parsePartName(partName)}: ${(parts as any)[partName]()}`)
-        .join("\n")
+  const results = await Promise.all(keys.map(getPartResult)).then((p) =>
+    p.sort((a, b) => a.localeCompare(b)).join("\n")
   );
+
+  console.log(`${name}:\n${results}`);
 };
