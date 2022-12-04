@@ -24,9 +24,8 @@ const rps = [
   [6, 0, 3], // S
 ];
 
-export const Day2: Day = {
-  name: "Day 2",
-  part_1: () => {
+export default Day(2, [
+  () => {
     return sumArray(
       readInputSplit(__dirname).map((data) => {
         const [f, s] = dataToIndex(data);
@@ -34,7 +33,7 @@ export const Day2: Day = {
       })
     );
   },
-  part_2: () => {
+  () => {
     return sumArray(
       readInputSplit(__dirname).map((data) => {
         const [f, s] = dataToIndex(data);
@@ -44,4 +43,4 @@ export const Day2: Day = {
       })
     );
   },
-};
+]);

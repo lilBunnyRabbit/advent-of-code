@@ -1,10 +1,6 @@
 import fs from "fs";
 import readline from "readline";
 
-export interface Day extends Record<`part_${number}`, () => number | string | void> {
-  name: `Day ${number}`;
-}
-
 export const readInput = (dirname: string): string => {
   try {
     return fs.readFileSync(`${dirname}/input.txt`, { encoding: "utf8" });
@@ -27,21 +23,18 @@ export const readInputByLine = async (dirname: string, callback: (line: string, 
   for await (const line of rl) await Promise.resolve(callback(line, index++));
 };
 
-export const printDay = async (day: Day) => {
-  const { name, ...parts } = day;
+export const Day = (day: number, parts: Array<() => any | Promise<any>>) => {
+  return async () => {
+    if (parts.length === 0) {
+      return console.log(`Day ${day}: No parts!`);
+    }
 
-  const getPartResult = async (partName: string) => {
-    const result = await Promise.resolve((parts as any)[partName]());
-    partName = partName.toString();
-    return `- ${partName.charAt(0).toUpperCase() + partName.slice(1).replace("_", " ")}: ${result}`;
+    console.log(`Day ${day}:`);
+    await Promise.all(
+      parts.map(async (part, i) => {
+        const result = await Promise.resolve(part());
+        return console.log(`- Part ${i + 1}: ${result}`);
+      })
+    );
   };
-
-  const keys: string[] = Object.keys(parts);
-  if (keys.length === 0) return console.log(`${name}: No parts!`);
-
-  const results = await Promise.all(keys.map(getPartResult)).then((p) =>
-    p.sort((a, b) => a.localeCompare(b)).join("\n")
-  );
-
-  console.log(`${name}:\n${results}`);
 };

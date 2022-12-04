@@ -1,12 +1,11 @@
 import { sumArray } from "../../tools";
 import { Day, readInputSplit } from "../../utils";
 
-export const Day1: Day = {
-  name: "Day 1",
-  part_1: () => {
+export default Day(1, [
+  () => {
     return Math.max(...readInputSplit(__dirname, /\n\n/).map((data) => sumArray(data.split(/\n/))));
   },
-  part_2: () => {
+  () => {
     return sumArray(
       readInputSplit(__dirname, /\n\n/)
         .map((data) => sumArray(data.split(/\n/)))
@@ -14,4 +13,4 @@ export const Day1: Day = {
         .slice(0, 3)
     );
   },
-};
+]);
