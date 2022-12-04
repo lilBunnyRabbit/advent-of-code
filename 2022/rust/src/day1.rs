@@ -1,10 +1,11 @@
-pub fn day1(data: String) {
+#[allow(dead_code)]
+pub fn day_1(data: String) {
   println!("Day 1:");
-  println!("- Part 1: {}", day_1_part_1(&data));
-  println!("- Part 2: {}", day_1_part_2(&data));
+  println!("- Part 1: {}", part_1(&data));
+  println!("- Part 2: {}", part_2(&data));
 }
 
-fn day_1_part_1(data: &String) -> i32 {
+fn part_1(data: &String) -> i32 {
   let max_value = data
     .split("\n\n")
     .into_iter()
@@ -23,7 +24,7 @@ fn day_1_part_1(data: &String) -> i32 {
   };
 }
 
-fn day_1_part_2(data: &String) -> i32 {
+fn part_2(data: &String) -> i32 {
   let mut values = data
     .split("\n\n")
     .into_iter()
