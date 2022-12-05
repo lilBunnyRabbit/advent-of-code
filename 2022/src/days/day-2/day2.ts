@@ -1,5 +1,5 @@
 import { sumArray } from "../../tools";
-import { Day, readInputSplit } from "../../utils";
+import { Day } from "../../utils";
 
 const dataToIndex = (data: string): [number, number] => {
   return data.split(" ").map((shape) => {
@@ -24,23 +24,18 @@ const rps = [
   [6, 0, 3], // S
 ];
 
-export default Day(2, [
-  () => {
-    return sumArray(
-      readInputSplit(__dirname).map((data) => {
-        const [f, s] = dataToIndex(data);
-        return rps[f][s] + s + 1;
-      })
-    );
-  },
-  () => {
-    return sumArray(
-      readInputSplit(__dirname).map((data) => {
-        const [f, s] = dataToIndex(data);
-        if (s === 0) return rps[f].findIndex((i) => i === 0) + 1;
-        if (s === 2) return rps[f].findIndex((i) => i === 6) + 6 + 1;
-        return 3 + f + 1;
-      })
-    );
-  },
-]);
+export default new Day(__filename)
+  .addPart(function () {
+    return this.input.reduce((sum, data) => {
+      const [f, s] = dataToIndex(data);
+      return sum + rps[f][s] + s + 1;
+    }, 0);
+  })
+  .addPart(function () {
+    return this.input.reduce((sum, data) => {
+      const [f, s] = dataToIndex(data);
+      if (s === 0) return sum + rps[f].findIndex((i) => i === 0) + 1;
+      if (s === 2) return sum + rps[f].findIndex((i) => i === 6) + 6 + 1;
+      return sum + 3 + f + 1;
+    }, 0);
+  });

@@ -1,5 +1,5 @@
 import { sumArray } from "../../tools";
-import { Day, readInputSplit } from "../../utils";
+import { Day } from "../../utils";
 
 const getItemPriority = (value: string): number => {
   if (value === value.toUpperCase()) {
@@ -8,10 +8,10 @@ const getItemPriority = (value: string): number => {
   return value.charCodeAt(0) - 96;
 };
 
-export default Day(3, [
-  () => {
+export default new Day(__filename)
+  .addPart(function () {
     return sumArray(
-      readInputSplit(__dirname).map((data) => {
+      this.getInput().map((data) => {
         const len = data.length / 2;
         const first = data.substring(0, len);
         const second = data.substring(len);
@@ -29,9 +29,9 @@ export default Day(3, [
         throw new Error("No matches!");
       })
     );
-  },
-  () => {
-    const rucksacks = readInputSplit(__dirname);
+  })
+  .addPart(function () {
+    const rucksacks = this.getInput();
     const priorities: number[] = [];
 
     for (let i = 0; i < rucksacks.length; i += 3) {
@@ -56,5 +56,4 @@ export default Day(3, [
     }
 
     return sumArray(priorities);
-  },
-]);
+  });
