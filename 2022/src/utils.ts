@@ -49,7 +49,7 @@ export class Day {
 
   /**
    * Read and split input.
-   * 
+   *
    * @see {@link getInput}
    * @readonly
    * @memberof Day
@@ -61,6 +61,19 @@ export class Day {
   addPart(part: PartFunction): this {
     this.parts.push(part);
     return this;
+  }
+
+  async getResults(): Promise<PartFunctionReturnType[]> {
+    return await Promise.all(this.parts.map(async (part) => await Promise.resolve(part.bind(this)())));
+  }
+
+  async getOutput(): Promise<string> {
+    if (this.parts.length === 0) {
+      return `${this.name}: No parts!`;
+    }
+
+    const results = await this.getResults();
+    return `${this.name}:\n${results.map((result, i) => `- Part ${i + 1}: ${result}`).join("\n")}`;
   }
 
   async execute() {
