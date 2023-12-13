@@ -36,6 +36,13 @@ export class Day {
     return this;
   }
 
+  /**
+   * A helper function that is excatly the same as `addPart` except it doesn't save the part.
+   */
+  public addPart__DISABLED(..._: Parameters<typeof this.addPart>) {
+    return this;
+  }
+
   public bindYear(year: Year) {
     this._year = year;
 

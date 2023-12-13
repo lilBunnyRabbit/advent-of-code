@@ -1,24 +1,49 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import type { Part, PartResult } from "../core";
+  import { cx } from "../utils/class.util";
 
   export let part: Part;
   export let input: string | undefined;
-  export let resultPromise: Promise<PartResult> | undefined;
 
+  let resultPromise: Promise<PartResult> | undefined;
   let showCode = false;
+
+  let status: "idle" | "loading" | "success" | "error" = "idle";
 
   $: id = `/years/${part.day.year?.value}/days/${part.day.value}/parts/${part.value}`;
 
+  export async function execute() {
+    status = "loading";
+    resultPromise = part.execute(input);
+
+    try {
+      await resultPromise;
+      status = "success";
+    } catch (error) {
+      status = "error";
+    }
+  }
+
   onMount(() => {
     if (part.config?.autoStart) {
-      resultPromise = part.execute(input);
+      execute();
     }
   });
 </script>
 
-<div {id} class="part flex flex-col" data-result={!!resultPromise}>
-  <div class="header flex justify-between bg-primary text-background px-4 py-2">
+<div {id} class="flex flex-col" data-result={!!resultPromise}>
+  <div
+    class={cx(
+      "flex justify-between text-background px-4 py-2",
+      {
+        idle: "bg-primary",
+        loading: "bg-info",
+        success: "bg-success",
+        error: "bg-error",
+      }[status]
+    )}
+  >
     <a href={`#${id}`}><h3>Part {part.value}</h3></a>
 
     <div class="flex items-center gap-4">
@@ -28,47 +53,31 @@
         }}>{showCode ? "Hide" : "Show"} code</button
       >
 
-      <button
-        on:click={() => {
-          resultPromise = part.execute(input);
-        }}>Start</button
-      >
+      <button on:click={execute}>Start</button>
     </div>
   </div>
 
-  <div class="body">
+  <div
+    class={cx(
+      (showCode || resultPromise) && "px-4 py-2 border bg-opacity-20",
+      {
+        idle: "border-primary bg-primary",
+        loading: "border-info bg-info",
+        success: "border-success bg-success",
+        error: "border-error bg-error",
+      }[status]
+    )}
+  >
     {#if showCode}
-      <pre class="px-4 py-2 bg-white text-xs"><code>{part.callback.toString()}</code></pre>
+      <pre class="text-xs overflow-auto"><code>{part.callback.toString()}</code></pre>
     {:else if resultPromise}
-      <div class="px-4 py-2">
-        {#await resultPromise}
-          Loading...
-        {:then result}
-          Result: {result}
-        {:catch error}
-          Error: {(error instanceof Error ? error : new Error(error)).message}
-        {/await}
-      </div>
+      {#await resultPromise}
+        Loading...
+      {:then result}
+        <span class="text-foreground">{result}</span>
+      {:catch error}
+        <span class="text-error">{(error instanceof Error ? error : new Error(error)).message}</span>
+      {/await}
     {/if}
   </div>
 </div>
-
-<style lang="scss">
-  .part {
-    &:not(:last-of-type) {
-      & > .header {
-        border-bottom: 1px solid theme("colors.foreground");
-      }
-
-      & > .body > *:first-child {
-        border-bottom: 1px solid theme("colors.foreground");
-      }
-    }
-
-    &:last-of-type {
-      & > .body > *:first-child {
-        border-top: 1px solid theme("colors.foreground");
-      }
-    }
-  }
-</style>
