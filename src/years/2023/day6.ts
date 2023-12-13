@@ -2,7 +2,7 @@ import { Day, Flag } from "../../core";
 import { asNumber, stringToNumbers } from "../../utils";
 import input from "./day6.txt?raw";
 
-const day = new Day(6, input, Flag.AUTO_START);
+const day = new Day(6, input);
 
 day.addPart((parser) => {
   const input = parser.input();
