@@ -7,12 +7,16 @@ export interface PartConfig {
   autoStart?: boolean;
 }
 
+export enum Flag {
+  AUTO_START,
+}
+
 export class Part {
   constructor(
     readonly day: Day,
     readonly value: number,
     readonly callback: PartCallback,
-    readonly config?: PartConfig
+    readonly flags: Set<Flag> = new Set()
   ) {}
 
   public async execute(input?: string): Promise<PartResult> {
@@ -24,14 +28,25 @@ export class Day {
   private _year: Year | null = null;
   readonly parts: Part[] = [];
 
-  constructor(readonly value: number, readonly input: string, readonly config?: PartConfig) {}
+  readonly flags: Set<Flag>;
+
+  constructor(readonly value: number, readonly input: string, flags?: Flag | Flag[]) {
+    this.flags = new Set(flags === undefined ? undefined : Array.isArray(flags) ? flags : [flags]);
+  }
 
   public get year() {
     return this._year;
   }
 
-  public addPart(callback: PartCallback, config?: PartConfig) {
-    this.parts.push(new Part(this, this.parts.length + 1, callback, { ...this.config, ...config }));
+  public addPart(callback: PartCallback, flags?: Flag | Flag[]) {
+    this.parts.push(
+      new Part(
+        this,
+        this.parts.length + 1,
+        callback,
+        new Set([...this.flags, ...(flags === undefined ? [] : Array.isArray(flags) ? flags : [flags])])
+      )
+    );
 
     return this;
   }

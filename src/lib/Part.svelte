@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import type { Part, PartResult } from "../core";
+  import { Flag, type Part, type PartResult } from "../core";
   import { cx } from "../utils/class.util";
 
   export let part: Part;
@@ -26,7 +26,7 @@
   }
 
   onMount(() => {
-    if (part.config?.autoStart) {
+    if (part.flags.has(Flag.AUTO_START)) {
       execute();
     }
   });
