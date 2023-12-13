@@ -7,8 +7,8 @@
   $: id = `/years/${year.value}`;
 </script>
 
-<div {id} class="flex flex-col gap-2 items-center">
-  <a href={`#${id}`}><h1>Year {year.value}</h1></a>
+<div {id} class="flex flex-col gap-2 w-full mt-8">
+  <a href={`#${id}`}><h1 class="border-b">Year {year.value}</h1></a>
 
   {#each year.days as day}
     <Day {day} />

@@ -4,16 +4,6 @@
 
 @layer base {
   :root {
-    --color-background: 255 246 231;
-    --color-foreground: 100 128 150;
-    --color-primary: 219 159 118;
-    --color-info: 118 197 219;
-    --color-success: 172 219 118;
-    --color-warn: 219 187 118;
-    --color-error: 219 118 118;
-  }
-
-  :root[class~="dark"] {
     --color-background: 26 43 51;
     --color-foreground: 185 182 170;
     --color-primary: 237 203 171;
@@ -23,8 +13,29 @@
     --color-error: 237 171 171;
   }
 
+  /* :root {
+    --color-background: 255 246 231;
+    --color-foreground: 100 128 150;
+    --color-primary: 219 159 118;
+    --color-info: 118 197 219;
+    --color-success: 172 219 118;
+    --color-warn: 219 187 118;
+    --color-error: 219 118 118;
+  } */
+
+  :root[class~="dark"] {
+    /* --color-background: 26 43 51;
+    --color-foreground: 185 182 170;
+    --color-primary: 237 203 171;
+    --color-info: 171 237 231;
+    --color-success: 206 237 171;
+    --color-warn: 237 219 171;
+    --color-error: 237 171 171; */
+  }
+
   h1 {
     font-size: theme("fontSize.2xl");
+    font-weight: theme("fontWeight.medium");
   }
 
   h2 {
@@ -44,7 +55,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    background-color: theme("colors.white");
+    background-color: theme("colors.background");
   }
 
   ::-webkit-scrollbar-thumb {

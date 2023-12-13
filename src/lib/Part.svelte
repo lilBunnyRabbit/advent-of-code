@@ -74,7 +74,7 @@
       {#await resultPromise}
         Loading...
       {:then result}
-        <span class="text-foreground">{result}</span>
+        <span class="text-success">{result}</span>
       {:catch error}
         <span class="text-error">{(error instanceof Error ? error : new Error(error)).message}</span>
       {/await}

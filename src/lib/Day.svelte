@@ -26,7 +26,7 @@
 
     <div class="border">
       <textarea
-        class="resize-y focus:outline-none min-h-full p-2 bg-white w-full overflow-auto whitespace-nowrap"
+        class="resize-y focus:outline-none min-h-full p-2 bg-background w-full overflow-auto whitespace-nowrap"
         bind:value={input}
       />
     </div>
@@ -38,14 +38,6 @@
     &::-webkit-scrollbar {
       width: 0.5rem;
       height: 0.5rem;
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: theme("colors.white");
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: theme("colors.white");
     }
   }
 </style>
