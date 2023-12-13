@@ -4,7 +4,7 @@ This project is a collection of my personal approaches to solving the puzzles pr
 
 ## Website
 
-> Note:  
+> [!NOTE] 
 > The website is still in progress!
 
 You can explore the solutions interactively on my website: [Advent of Code by lilBunnyRabbit](https://lilbunnyrabbit.github.io/advent-of-code/)
